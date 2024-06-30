@@ -5,22 +5,18 @@ function App() {
   const data = [
     {
       id: 1,
-      title: 'HTML',
       note: 'Hyper Markup Language'
     },
     {
       id: 2,
-      title: 'CSS',
-      note: 'Stylesheet'
+      note: 'Jog arounf the park 3x'
     },
     {
       id: 3,
-      title: 'JavaScript',
       note: 'Scripting Lanaguage'
     },
     {
       id: 4,
-      title: 'ReactJS',
       note: 'JavaScript Framework'
     },
   ];
@@ -32,9 +28,8 @@ function App() {
 
   // To add new Note
   function addNote(){
-    setNotes([...notes, {id: count, title: title, note: note}]);
+    setNotes([...notes, {id: count,  note: note}]);
     setCount(count + 1);
-    setTitle("");
     setNote("");
     console.log(notes);
   }
@@ -44,32 +39,40 @@ function App() {
   }
   return (
     <div className="app">
-      <div className='header'>
-        <h1>ToDo</h1>
-        <input
-          type="text"
-          placeholder="add title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <button
-          type="submit"
-          onClick={addNote}
-        >
-          Submit
-        </button>
+      <div className='container'>
+        <div className='header'>
+          <h1>ToDo</h1>
+          <input
+            type="text"
+            placeholder="Create a new todo..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            onKeyUp={(e) => (e.target.value)}
+          />
+        </div>
       </div>
+      <div className='notes-container'>
         {notes.map((e) => (
-          <div className='notes' key={e.id}>
-            <h5>Title: {e.title}</h5>
-            <button
-              type="input"
-              onClick={() => removeItem(e.id)}
-            >
-              X
-            </button>
+            <div className='notes' key={e.id}>
+              <h5>{e.note}</h5>
+{/*               <button
+                type="input"
+                onClick={() => removeItem(e.id)}
+              >
+                X
+              </button> */}
+            </div>
+          ))}
+          <div className='footer'>
+            <div className='counter'>items left</div>
+            <div className='footer-menu'>
+                  <a>All</a>
+                  <a>Active</a>
+                  <a>Completed</a>
+            </div>
+            <div className='clear'>Clear Completed</div>
           </div>
-        ))}
+      </div>
     </div>
   );
 }
